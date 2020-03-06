@@ -1,10 +1,16 @@
 {
   "name": "react-native-jnu",
   "version": "1.0.0",
+  "private": true,
   "description": "Parse Information of Jeju National University For React Native",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "lint": "eslint --ext '.js,.ts,.tsx' .",
+    "typescript": "tsc --noEmit",
+    "test": "jest",
+    "prerelease": "lerna run clean",
+    "release": "lerna publish",
+    "example": "yarn --cwd example"
   },
   "repository": {
     "type": "git",
@@ -24,6 +30,7 @@
     "@babel/plugin-proposal-optional-chaining": "^7.8.3",
     "@babel/preset-env": "^7.8.7",
     "@babel/preset-flow": "^7.8.3",
+    "@babel/preset-react": "^7.8.3",
     "@babel/preset-typescript": "^7.8.3",
     "@babel/runtime": "^7.8.7",
     "@commitlint/config-conventional": "^8.3.4",
@@ -33,11 +40,44 @@
     "core-js": "^3.6.4",
     "detox": "^15.4.2",
     "eslint": "^6.8.0",
+    "eslint-config-satya164": "^3.1.5",
     "husky": "^4.2.3",
     "jest": "^25.1.0",
     "lerna": "^3.20.2",
     "prettier": "^1.19.1",
     "ts-loader": "^6.2.1",
     "typescript": "^3.8.3"
+  },
+  "resolutions": {
+    "react": "~16.9.0",
+    "react-native": "~0.61.5"
+  },
+  "husky": {
+    "hooks": {
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
+      "pre-commit": "yarn lint && yarn typescript && yarn test"
+    }
+  },
+  "jest": {
+    "testEnvironment": "node",
+    "testRegex": "/__tests__/.*\\.(test|spec)\\.(js|tsx?)$",
+    "transform": {
+      "^.+\\.(js|ts|tsx)$": "babel-jest"
+    },
+    "setupFiles": [
+      "<rootDir>/jest/setup.js"
+    ],
+    "moduleNameMapper": {
+      "@react-native-jnu/([^/]+)": "<rootDir>/packages/$1/src"
+    }
+  },
+  "prettier": {
+    "tabWidth": 4,
+    "useTabs": false,
+    "singleQuote": true,
+    "trailingComma": "es5"
+  },
+  "dependencies": {
+    "rn-fetch-blob": "^0.12.0"
   }
 }
