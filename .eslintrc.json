@@ -1,0 +1,10 @@
+{
+    "extends": "satya164",
+    "env": { 
+        "browser": true, 
+        "node": true 
+    },
+    "settings": {
+        "react": { "version": "16" }
+    }
+}

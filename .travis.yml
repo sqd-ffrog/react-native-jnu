@@ -1,0 +1,9 @@
+language: node_js
+node_js:
+  - 12
+
+install:
+  - yarn install --frozen-lockfile
+  - yarn lint
+  - yarn test
+  - yarn typescript
